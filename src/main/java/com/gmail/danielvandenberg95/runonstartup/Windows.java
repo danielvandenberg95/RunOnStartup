@@ -49,7 +49,7 @@ class Windows implements OperatingSystem {
 	}
 
 	private String getKeyValue(File fileToRun) {
-		return "javaw -jar \"" + fileToRun.getAbsolutePath() + "\"";
+		return "\"" + fileToRun.getAbsolutePath() + "\"";
 	}
 
 }
