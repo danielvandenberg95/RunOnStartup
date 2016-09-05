@@ -8,7 +8,7 @@ class Windows implements OperatingSystem {
 	@Override
 	public boolean getRunOnStartup(File fileToRun) {
 		try {
-			String value = "javaw -jar \"" + fileToRun.getAbsolutePath() + "\"";
+			String value = getKeyValue(fileToRun);
 			String registry = WinRegistry.readString(
 					WinRegistry.HKEY_CURRENT_USER,
 					"Software\\Microsoft\\Windows\\CurrentVersion\\Run",
@@ -27,7 +27,7 @@ class Windows implements OperatingSystem {
 			return;
 		}
 		if (run) {
-			String value = "\"javaw -jar " + fileToRun.getAbsolutePath() + "\"";
+			String value = getKeyValue(fileToRun);
 			try {
 				WinRegistry.writeStringValue(WinRegistry.HKEY_CURRENT_USER,
 						"Software\\Microsoft\\Windows\\CurrentVersion\\Run",
@@ -46,6 +46,10 @@ class Windows implements OperatingSystem {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private String getKeyValue(File fileToRun) {
+		return "javaw -jar \"" + fileToRun.getAbsolutePath() + "\"";
 	}
 
 }
